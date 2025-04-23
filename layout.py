@@ -85,9 +85,9 @@ def create_layout(app):
                     # Filtros
                     html.Div(
                         style={
-                            'width': '30%',
+                            'width': '35%',
                             'minWidth': '280px',
-                            'maxWidth': '300px',
+                            'maxWidth': '400px',
                             'backgroundColor': '#ffffff',
                             'color': 'black',
                             'padding': '10px',
@@ -136,11 +136,12 @@ def create_layout(app):
                             )
                         ],
                     ),
+
                     # Área de gráficos
                     html.Div(
                         style={
-                            'width': '70%',
-                            'minWidth': '300px',
+                            'width': '65%',
+                            'minWidth': '600px',
                             'backgroundColor': '#f8f9fa',  # Fundo claro
                             'color': 'black',
                             'padding': '15px',
@@ -153,12 +154,12 @@ def create_layout(app):
                                 style={
                                     'display': 'flex',
                                     'flexDirection': 'row',
-                                    'alignItems': 'center',  # Alinha os itens ao topo
+                                    'alignItems': 'flex-start',  # Alinha os itens ao topo
                                     'justifyContent': 'space-between'
                                 },
                                 children=[
                                     # Gráfico
-                                    dcc.Graph(id='vetor-grafico', style={'flex': '0.5'}),
+                                    dcc.Graph(id='vetor-grafico', style={'flex': '2'}),
 
                                     # Descrição do gráfico
                                     html.Div(
@@ -173,17 +174,27 @@ def create_layout(app):
                                             'height': '100%'  # Garante preenchimento dinâmico
                                         },
                                         children=[
-                                            html.Img(
-                                                id='gif-image',
-                                                src='',  # Atualizado via callback
-                                                style={
-                                                    'width': '100%',
-                                                    'maxWidth': '900px',
-                                                    'borderRadius': '8px',
-                                                    #'border': '1px solid #ccc'
-                                                }
+                                            html.H4("Descrição do gráfico", style={'marginBottom': '10px'}),
+                                            html.P(
+                                                "O vetor em azul representa o equilibrio entre as dimensões onde as coordenadas desse vetor é (10,10,10), isso significa que o estado teria o valor máximo do trilema nas três dimnesões.",
+                                                style={'marginBottom': '5px'}
                                             ),
-                                            
+                                            html.P(
+                                                "Os vetores da cor preto representam as projeções do vetor ideal da cor azul em cima de cada eixo. Os pontos de cada vetor ideal são ligados entre si através de uma figura, que é uma representação do equilibrio entre as dimensões.",
+                                                style={'marginBottom': '5px'}
+                                            ),
+                                            html.P(
+                                                "Os pontos de cada vetor ideal são ligados entre si através de uma figura, que é uma representação do equilibrio entre as dimensões.",
+                                                style={'marginBottom': '5px'}
+                                            ),
+                                            html.P(
+                                                "O vetor da cor vermelho representa a situação em cada dimensão do estado selecionado, onde cada coordenada do vetor vai indicar qual dimensão esta sendo priorizada.",
+                                                style={'marginBottom': '5px'}
+                                            ),
+                                            html.P(
+                                                "Os vetores da cor amarela representam as projeções do vetor vermelho em cima de cada eixo. Os pontos de cada vetor são ligados entre si através da figura vermelha, que é uma representação da condição atual do estado em relação as dimensões.",
+                                                style={'marginBottom': '5px'}
+                                            ),
                                         ]
                                     )
                                 ]
@@ -194,70 +205,112 @@ def create_layout(app):
                 ]
             ),
             # **Nova Div abaixo do gráfico para o GIF + Dropdown de seleção**
-           html.Div(
+            html.Div(
                 style={
-                    'backgroundColor': '#f8f9fa',
+                    #'padding': '5px 0',  # Espaçamento vertical
+                    'backgroundColor': '#f8f9fa',  # Cor de fundo opcional para destaque
                     'borderRadius': '10px',
-                    'padding': '30px 20px',
-                    'fontFamily': 'Helvetica',
-                    'color': '#001219'
+                    
+
                 },
                 children=[
+                    # Título principal
+                    html.H4(
+                        "Visualização Animada do Movimento dos Vetores",
+                        style={
+                            'color': 'gray',
+                            'fontFamily': 'Helvetica',
+                            'fontSize': '24px',
+                            'textAlign': 'left',
+                            'margin': '0 auto',
+                            'maxWidth': '90%',
+                            'marginTop': '30px',
+                        }
+                    ),
+
+                    # Container principal com texto e imagem
                     html.Div(
                         style={
+                            'width': '88%',
+                            'margin': '20px auto',
                             'display': 'flex',
                             'flexDirection': 'row',
-                            'justifyContent': 'space-between',
                             'alignItems': 'flex-start',
-                            'flexWrap': 'wrap',
-                            'gap': '30px',
-                            'maxWidth': '1000px',
-                            'margin': '0 auto',
-                            'padding': '20px',
-                            'backgroundColor': '#ffffff',
+                            'justifyContent': 'space-between',
+                            'backgroundColor': '#f8f9fa',
+                            'padding': '5px',
                             'borderRadius': '12px',
-                            'boxShadow': '0 4px 8px rgba(0, 0, 0, 0.05)',
+                            #'gap': '0px',
+                            #'boxShadow': '0 4px 8px rgba(0, 0, 0, 0.1)'
                         },
                         children=[
-                            # Texto à esquerda
+                            # Texto explicativo à esquerda
                             html.Div(
                                 style={
-                                    'flex': '1',
-                                    'minWidth': '280px',
-                                    'maxWidth': '450px',
+                                    'width': '35%',
+                                    'textAlign': 'left',
+                                    'padding': '5px',
                                     'display': 'flex',
                                     'flexDirection': 'column',
-                                    'gap': '10px',
-                                    'textAlign': 'left',
+                                    'justifyContent': 'center',
+                                    'alignItems': 'flex-start',
+                                    'fontFamily': 'Helvetica',
+                                    'color': '#001219'
                                 },
                                 children=[
-                                    html.H4("Descrição do gráfico", style={'marginBottom': '8px'}),
-                                    html.P("O vetor em azul representa o equilíbrio entre as dimensões onde as coordenadas desse vetor são (10,10,10). Isso significa que o estado teria o valor máximo do trilema nas três dimensões."),
-                                    html.P("Os vetores na cor preta representam as projeções do vetor ideal (azul) em cada eixo. Os pontos desses vetores são ligados entre si formando uma figura — representação do equilíbrio entre as dimensões."),
-                                    html.P("O vetor vermelho representa a situação atual do estado em cada dimensão. Suas coordenadas indicam qual dimensão está sendo priorizada."),
-                                    html.P("As projeções do vetor vermelho em cada eixo são representadas por vetores amarelos. Os pontos finais desses vetores formam uma figura vermelha que simboliza a condição atual do estado."),
+                                    html.P(
+                                        "Nesta seção é possível observar, através de GIFs, o movimento dos vetores de cada estado, permitindo visualizar para qual dimensão o estado está priorizando.",
+                                        style={'marginBottom': '12px'}
+                                    ),
+                                    html.P(
+                                        "Observe que existe uma caixa de seleção acima do GIF ao lado. A partir dessa caixa, é possível selecionar um estado e observar o GIF correspondente."
+                                    ),
                                 ]
                             ),
-                            # Texto à direita
+
+                            # Dropdown + GIF à direita
                             html.Div(
                                 style={
-                                    'flex': '1',
-                                    'minWidth': '280px',
-                                    'maxWidth': '450px',
+                                    'width': '65%',
+                                    'minWidth': '300px',
                                     'display': 'flex',
                                     'flexDirection': 'column',
-                                    'gap': '10px',
-                                    'textAlign': 'left',
+                                    'alignItems': 'center',
+                                    'justifyContent': 'center',
                                 },
                                 children=[
-                                    html.H4("Movimento Animado do Sistema", style={'marginBottom': '8px'}),
-                                    html.P("Através de GIF's é possível observar o movimento dos vetores de cada estado, permitindo visualizar para qual dimensão o estado está priorizando."),
-                                    html.P("Observe que é possível selecionar qual o estado você quer visualizar o movimento selecionando o estado no filtro lateral."),
+                                    dcc.Dropdown(
+                                        id='gif-dropdown',
+                                        options=[{'label': est, 'value': est} for est in estado],
+                                        value=estado[0],
+                                        clearable=False,
+                                        style={
+                                            'width': '55%',
+                                            'fontSize': '16px',
+                                            'marginBottom': '20px',
+                                            'fontFamily': 'Helvetica',
+                                            'textAlign': 'center',
+                                            'alignItems': 'left',
+                                        }
+                                    ),
+                                    html.Img(
+                                        id='gif-image',
+                                        src='',  # Atualizado via callback
+                                        style={
+                                            'width': '100%',
+                                            'maxWidth': '520px',
+                                            'borderRadius': '8px',
+                                            'border': '1px solid #ccc'
+                                        }
+                                    )
                                 ]
                             ),
                         ]
-                    )
+                    ),
                 ]
             )
+
+                    
+
         ]
     )

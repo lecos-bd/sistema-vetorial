@@ -16,11 +16,10 @@ df_equidade = dt.tratamento_equidade()
 
 def callbacks(app):
 
-    # Callback para alternar visibilidade
     @app.callback(
         Output('gif-image', 'src'),
-        Input('estado-dropdown', 'value')
-        #Input('gif-dropdown', 'value')
+        #Input('estado-dropdown', 'value')
+        Input('gif-dropdown', 'value')
     )
 
     def atualizar_gif(estado_selecionado):
@@ -99,7 +98,7 @@ def callbacks(app):
             mode='lines+markers',
             line=dict(color='red', width=5),
             marker=dict(size=4),
-            name='Generic vector'
+            name='Vetor do Trilema do Estado'
         ))
 
         # Vetor ideal
@@ -108,17 +107,16 @@ def callbacks(app):
             mode='lines+markers',
             line=dict(color='blue', width=5),
             marker=dict(size=4),
-            name='Ideal vector'
+            name='Vetor do Trilema Ideal'
         ))
 
         # projeções vetor ideal
-
         fig1.add_trace(go.Scatter3d(
             x=[start[0], ideal[0]], y=[start[1], 0], z=[start[2], 0],
             mode='lines+markers',
             line=dict(color='#1d3557', width=5),
             marker=dict(size=4),
-            name='Ideal vector x'
+            name='Vetor Ideal Dimensão Equidade Energética'
         ))
 
         fig1.add_trace(go.Scatter3d(
@@ -126,7 +124,7 @@ def callbacks(app):
             mode='lines+markers',
             line=dict(color='#1d3557', width=5),
             marker=dict(size=4),
-            name='Ideal vector y'
+            name='Vetor Ideal Dimensão Segurança Energética'
         ))
 
         fig1.add_trace(go.Scatter3d(
@@ -134,7 +132,7 @@ def callbacks(app):
             mode='lines+markers',
             line=dict(color='#1d3557', width=5),
             marker=dict(size=4),
-            name='Ideal vector z'
+            name='Vetor Ideal Dimensão Bem-estar'
         ))
 
         # projeções vetor de analise
@@ -144,7 +142,7 @@ def callbacks(app):
             mode='lines+markers',
             line=dict(color='#ffba08', width=5),
             marker=dict(size=4),
-            name='Royal vector x'
+            name='Dimensão Equidade Energética do Estado'
         ))
 
         fig1.add_trace(go.Scatter3d(
@@ -152,7 +150,7 @@ def callbacks(app):
             mode='lines+markers',
             line=dict(color='#ffba08', width=5),
             marker=dict(size=4),
-            name='Royal vector y'
+            name='Dimensão Segurança Energética do Estado'
         ))
 
         fig1.add_trace(go.Scatter3d(
@@ -160,7 +158,7 @@ def callbacks(app):
             mode='lines+markers',
             line=dict(color='#ffba08', width=5),
             marker=dict(size=4),
-            name='Royal vector z'
+            name='Dimensão Bem-estar do Estado'
         ))
 
         # face triangular
